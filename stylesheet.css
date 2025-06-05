@@ -1,0 +1,42 @@
+*{
+    border: 1px solid red;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    min-width: fit-content;
+    margin: 0;
+}
+
+.buttonContainer{
+    min-width: fit-content;
+    margin: 10em;
+}
+
+.clearAndDisplay, .buttonsRowOne, .buttonsRowTwo, .buttonsRowThree, .buttonsRowFour{
+    display: flex;
+    flex-flow: row nowrap;
+    min-width: fit-content;
+}
+
+.smallBut{
+    width: 10em;
+    height: 8em;
+    cursor: pointer;
+}
+
+.bigBut{
+    width: 20em;
+    height: 8em;
+    cursor: pointer;
+}
+
+.display{
+    width: 75%;
+    text-align: center;
+    align-self: center;
+    font-size: 1.5em;    
+}
