@@ -13,7 +13,10 @@ body{
 
 .buttonContainer{
     min-width: fit-content;
-    margin: 10em;
+}
+
+.clearAndDisplay{
+    margin-top: 20em;
 }
 
 .clearAndDisplay, .buttonsRowOne, .buttonsRowTwo, .buttonsRowThree, .buttonsRowFour{
@@ -22,7 +25,7 @@ body{
     min-width: fit-content;
 }
 
-.smallBut{
+.smallBut, .smallButOperate, .smallButEqual{
     width: 10em;
     height: 8em;
     cursor: pointer;
