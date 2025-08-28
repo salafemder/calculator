@@ -1,3 +1,12 @@
+let firstNumber = '';
+let secondNumber = '';
+let operator = undefined;
+let arrayOfOperators = ['+','-','/','x'];
+
+const numberButtons = document.querySelectorAll(".number_Button");
+const operatorButtons = document.querySelectorAll(".operator_Button");
+const resultDisplay = document.getElementById("result");
+
 const addition = (numb1, numb2) => {
     return numb1 + numb2
 }
@@ -8,8 +17,14 @@ const multiplication = (numb1, numb2) => {
     return numb1 * numb2
 }
 const division = (numb1, numb2) => {
-    return numb1 / numb2
-}
+    if(numb1 === 0 || numb2 === 0){
+        alert('Nice try dork, now try dividing with a number other than zero this time smh');
+        return ''
+    }
+    else{
+        return numb1 / numb2;
+    }
+};
 
 const getCalculation = (operator, numb1, numb2) => {
     switch(operator) {
@@ -26,34 +41,50 @@ const getCalculation = (operator, numb1, numb2) => {
     }
 }
 
-
-let firstNumb = undefined;
-let secondNumb = undefined;
-let operator = undefined;
-let arrayOfOperators = ['+','-','x','/'];
-
-const btns = document.querySelector('.buttonContainer');
-    btns.addEventListener('click', (event) => {
-        let calcInput = event.target.textContent;
-        let calcDisplay = document.querySelector('.display');
-        let equalSign = document.querySelector('.smallButEqual');
-        if (arrayOfOperators.includes(calcInput)){
-            operator = calcInput;
+numberButtons.forEach((button)=>{
+    button.addEventListener('click',()=>{
+        const number = button.id;
+        if(operator === undefined){
+            firstNumber += number;
+        } 
+        else{
+            secondNumber = number;
         }
-        calcDisplay.textContent == operator ? calcDisplay.textContent = calcInput : calcDisplay.textContent += calcInput;
-        if (calcDisplay.textContent.includes(operator) && firstNumb === undefined){
-            firstNumb = parseInt(calcDisplay.textContent);     
-            return calcDisplay.textContent = calcInput;    
-        }
-        else if (calcDisplay.textContent.includes(equalSign.textContent) && firstNumb !== undefined){
-            secondNumb = parseInt(calcDisplay.textContent.slice(0, -1));
-            return calcDisplay.textContent = (getCalculation(operator, firstNumb, secondNumb))
-     }
+        updateDisplay();
     });
-    
-    //display text content should allow for more numbers to be concated to it (done)
-    //if user presses operator sign, firstNumb variable to store display content (done)
-    //operator variable to store pressed operator sign when firstNumb is stored (done)
-    //repeat above steps, storing in secondNumb when = sign is pressed
-    //return appropriate function with value converted to string data type
-    //slay???
+});
+
+operatorButtons.forEach((button)=>{
+    button.addEventListener('click',()=>{
+        const value = button.id
+        if(value === '='){
+            if(firstNumber !== '' && secondNumber !== '' && operator !== undefined){
+                firstNumber = parseInt(firstNumber);
+                secondNumber = parseInt(secondNumber);
+                const result = getCalculation(operator,firstNumber,secondNumber);
+                resultDisplay.textContent = result;
+                firstNumber = result;
+                secondNumber = '';
+                operator = undefined;
+            }
+        }
+        else if(value === 'clear'){
+            firstNumber = '';
+            secondNumber = '';
+            operator = undefined;
+            resultDisplay.textContent = '';
+        }
+        else if(arrayOfOperators.includes(value)){
+            operator = value;
+        }
+    });
+})
+
+function updateDisplay(){
+    if(firstNumber !== '' && secondNumber !== '' && operator !== undefined){
+        resultDisplay.textContent = firstNumber + operator + secondNumber;
+    }
+    else if(firstNumber !== ''){
+        resultDisplay.textContent = firstNumber;
+    }
+}
