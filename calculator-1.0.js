@@ -48,7 +48,7 @@ numberButtons.forEach((button)=>{
             firstNumber += number;
         } 
         else{
-            secondNumber = number;
+            secondNumber += number;
         }
         updateDisplay();
     });
